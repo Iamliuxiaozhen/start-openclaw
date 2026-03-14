@@ -13,4 +13,4 @@ RUN npm install -g openclaw
 WORKDIR /root
 
 # 默认命令
-CMD ["openclaw", "gateway"]
+CMD ["sh", "-c", "openclaw gateway"]
