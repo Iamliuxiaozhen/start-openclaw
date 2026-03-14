@@ -3,10 +3,13 @@ services:
     build: .
     container_name: openclaw-bot
     restart: unless-stopped
+    privileged: true # 有时候浏览器沙箱需要这个，或者在环境变量里禁用 sandbox
     ports:
-      - "18789:18789"  # Control UI
+      - "18789:18789"
     volumes:
       - /home/oliver/ai-workspace:/workspace
       - /home/oliver/.openclaw:/root/.openclaw
     environment:
       - NODE_ENV=production
+    stdin_open: true # 保持标准输入开启
+    tty: true        # 允许交互

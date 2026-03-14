@@ -1,15 +1,15 @@
-# Dockerfile
 FROM node:20-bullseye
 
-# 安装额外依赖
+# 安装系统依赖和常用的浏览器运行环境库
 RUN apt-get update && \
-    apt-get install -y git python3 python3-pip && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y \
+    git \
+    && rm -rf /var/lib/apt/lists/*
 
 # 安装 OpenClaw
 RUN npm install -g openclaw
 
-# 设置工作目录
+
 WORKDIR /root
 
 # 默认命令
