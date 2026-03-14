@@ -1,0 +1,18 @@
+services:
+  openclaw:
+    image: ubuntu:latest
+    container_name: openclaw-bot
+    restart: unless-stopped
+    ports:
+      - "18789:18789"
+    volumes:
+      - /home/oliver/ai-workspace:/workspace
+      - /home/oluver/.openclaw:/root/.openclaw
+    command: >
+      bash -c "
+      apt update &&
+      apt install -y nodejs npm git curl &&
+      npm install -g openclaw &&
+      cd /workspace &&
+      openclaw gateway
+      "
