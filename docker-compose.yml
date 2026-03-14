@@ -1,18 +1,13 @@
+version: "2.0"
 services:
   openclaw:
-    image: ubuntu:latest
+    build: .
     container_name: openclaw-bot
     restart: unless-stopped
     ports:
-      - "18789:18789"
+      - "18789:18789"  # Control UI
     volumes:
       - /home/oliver/ai-workspace:/workspace
-      - /home/oluver/.openclaw:/root/.openclaw
-    command: >
-      bash -c "
-      apt update &&
-      apt install -y nodejs npm git curl &&
-      npm install -g openclaw &&
-      cd /workspace &&
-      openclaw gateway
-      "
+      - /home/oliver/.openclaw:/root/.openclaw
+    environment:
+      - NODE_ENV=production
