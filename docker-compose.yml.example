@@ -1,0 +1,19 @@
+services:
+  openclaw:
+    build: .
+    container_name: openclaw-bot
+    restart: unless-stopped
+    privileged: true
+    ports:
+      - "127.0.0.1:18789:18789"
+    volumes:
+     # 这里填挂载卷
+     # Fill in the mount volume here
+     # example
+     # -/home/usermae/ai-workspace:/workspace
+     # /home/username/.openclaw:/root/.openclaw
+    environment:
+      - NODE_ENV=production
+
+    stdin_open: true
+    tty: true
