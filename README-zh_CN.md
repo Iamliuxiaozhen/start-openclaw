@@ -1,5 +1,6 @@
 # Start openclaw
 利用docker快速启动您的openclaw
+语言/language:[English](README.md)
 ## 快速入门
 在此之前，请做好以下准备
 - 宿主机已安装`docker`

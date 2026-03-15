@@ -1,5 +1,6 @@
 # Start openclaw
 Quickly launch your openclaw with Docker
+language/语言:[简体中文](README-zh_CN.md)
 
 ## Quick Start
 Before getting started, please ensure the following prerequisites are met:
