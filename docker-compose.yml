@@ -7,7 +7,7 @@ services:
     ports:
       - "18789:18789"
     volumes:
-      - /home/oliver/ai-workspace:/workspace
+      - /home/oliver/ai-workspace:/root
       - /home/oliver/.openclaw:/root/.openclaw
     environment:
       - NODE_ENV=production
