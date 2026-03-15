@@ -109,6 +109,67 @@ openclaw onboard
 └
 ```
 选择适合您的大模型提供商
+```bash
+◇  Model configured ─────────────────────────────╮
+│                                                │
+│  Default model set to qwen-portal/coder-model  │
+│                                                │
+├────────────────────────────────────────────────╯
+│
+◆  Default model
+│  ● Keep current (qwen-portal/coder-model)
+│  ○ Enter model manually
+│  ○ qwen-portal/coder-model
+│  ○ qwen-portal/vision-model
+└
+```
+选择使用的模型
+```bash
+◆  Select channel (QuickStart)
+│  ● Telegram (Bot API) (recommended · newcomer-friendly)
+│  ○ WhatsApp (QR link)
+│  ○ Discord (Bot API)
+│  ○ IRC (Server + Nick)
+│  ○ Google Chat (Chat API)
+│  ○ Slack (Socket Mode)
+│  ○ Signal (signal-cli)
+│  ○ iMessage (imsg)
+│  ○ LINE (Messaging API)
+│  ○ Feishu/Lark (飞书)
+│  ○ Nostr (NIP-04 DMs)
+│  ○ Microsoft Teams (Bot Framework)
+│  ○ Mattermost (plugin)
+│  ○ Nextcloud Talk (self-hosted)
+│  ○ Matrix (plugin)
+│  ○ BlueBubbles (macOS app)
+│  ○ Zalo (Bot API)
+│  ○ Zalo (Personal Account)
+│  ○ Synology Chat (Webhook)
+│  ○ Tlon (Urbit)
+│  ○ Skip for now
+└
+```
+这里让我们配置聊天软件，如果没有选择`Skip for now`
+```bash
+◇  Web search ────────────────────────────────────────╮
+│                                                     │
+│  Web search lets your agent look things up online.  │
+│  Choose a provider and paste your API key.          │
+│  Docs: https://docs.openclaw.ai/tools/web           │
+│                                                     │
+├─────────────────────────────────────────────────────╯
+│
+◆  Search provider
+│  ● Brave Search (Structured results · country/language/time filters)
+│  ○ Gemini (Google Search)
+│  ○ Grok (xAI)
+│  ○ Kimi (Moonshot)
+│  ○ Perplexity Search
+│  ○ Skip for now
+```
+这里让我们配置网络搜索功能，如果没有选择`Skip for now`
+根据提示继续操作即可
+
 这里省去一些步骤，后续补上。
 ### 访问openclaw
 配置完成后，您可以通过：
