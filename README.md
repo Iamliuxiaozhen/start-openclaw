@@ -1,24 +1,157 @@
 # Start openclaw
-这是小圳快速启动Openclaw的脚本
-## 快捷命令
+利用docker快速启动您的openclaw
+## 快速入门
+在此之前，请做好以下准备
+- 宿主机已安装`docker`
+- 宿主机可以访问`ghcr.io`
+- 宿主机可以访问`github.com`
+### 1.拉取镜像
+您可以通过以下命令拉取镜像
+```bash
+sudo docker pull ghcr.io/iamliuxiaozhen/start-openclaw:latest
+```
+### 2.运行
+构建运行有2个方法，请根据您的需要进行参考
+- 方法1 `docker-compose`(推荐)
+- 方法2 `docker run`命令
+#### 使用`docker-compose`运行此项目
+参考本项目的`docker-compose.yml.example`文件。下载本文件后将本文件重命名为`docker-compose`
+```yaml
+services:
+  openclaw:
+    build: .
+    container_name: openclaw-bot
+    restart: unless-stopped
+    privileged: true
+    ports:
+      - "127.0.0.1:18789:18789"
+    volumes:
+     # 这里填挂载卷
+     # -/home/usermae/ai-workspace:/workspace
+     # /home/username/.openclaw:/root/.openclaw
+    environment:
+      - NODE_ENV=production
 
-### 构建镜像
+    stdin_open: true
+    tty: true
+```
+通常，您只需要修改挂载卷
+> [!CAUTION]
+>强烈建议您配置挂载卷，否则AI容易丢失上下文甚至重要资料。
+##### 使用`docker run`命令
+您可以运行以下命令启动本项目
 ```bash
-sudo docker compose build
+docker run -d \
+  --name openclaw-bot \
+  --restart unless-stopped \
+  --privileged \
+  -p 127.0.0.1:18789:18789 \
+  -v /home/username/ai-workspace:/workspace \
+  -v /home/username/.openclaw:/root/.openclaw \
+  -e NODE_ENV=production \
+  -it \
+  openclaw:latest
+```
+请将`-v`的参数换为您想将挂载卷存放的位置。
+> [!CAUTION]
+>强烈建议您配置挂载卷，否则AI容易丢失上下文甚至重要资料。
+### 初始化openclaw（首次需要）
+要初始openclaw，您需要先进入容器内部，请使用下列命令进入docker容器内部
+```bash
+docker exec -it openclaw-bot bash
+```
+接着，初始化openclaw
+```bash
+openclaw onboard
+```
+![openclaw初始化安全同意页面](images/1.png)
+
+阅读并知晓风险
+``bash
+◆  Onboarding mode
+│  ● QuickStart (Configure details later via openclaw configure.)
+│  ○ Manual
+```
+选择`QuickStart`继续
+```bash
+◆  Model/auth provider
+│  ● OpenAI (Codex OAuth + API key)
+│  ○ Anthropic
+│  ○ Chutes
+│  ○ MiniMax
+│  ○ Moonshot AI (Kimi K2.5)
+│  ○ Google
+│  ○ xAI (Grok)
+│  ○ Mistral AI
+│  ○ Volcano Engine
+│  ○ BytePlus
+│  ○ OpenRouter
+│  ○ Kilo Gateway
+│  ○ Qwen
+│  ○ Z.AI
+│  ○ Qianfan
+│  ○ Alibaba Cloud Model Studio
+│  ○ Copilot
+│  ○ Vercel AI Gateway
+│  ○ OpenCode
+│  ○ Xiaomi
+│  ○ Synthetic
+│  ○ Together AI
+│  ○ Hugging Face
+│  ○ Venice AI
+│  ○ LiteLLM
+│  ○ Cloudflare AI Gateway
+│  ○ Custom Provider
+│  ○ Ollama
+│  ○ SGLang
+│  ○ vLLM
+│  ○ Skip for now
+└
+```
+选择适合您的大模型提供商
+这里省去一些步骤，后续补上。
+### 访问openclaw
+配置完成后，您可以通过：
+```url
+http://127.0.0.1:18789/
+```
+访问openclaw的网页版
+## 进阶与其他
+### 修复宿主机无法访问`http://127.0.0.1:18789/`
+进入容器
+```bash
+docker exec -it openclaw-bot bash
+```
+进入目录
+```bash
+cd /root/.openclaw
+```
+修改配置
+```bash
+nano openclaw.json
+```
+找到`"bind": "loopback"`
+修改为`"bind": "lan"`
+|模式|监听范围|
+|--|--|
+|loopback|只容器内部
+|lan|局域网
+|auto|自动判断
+|tailnet|只在 Tailscale
+|custom|自定义
+
+### 配置全局域网访问openclaw网页版
+
+上述的docker启动文件从`127.0.0.1`改为`0.0.0`
+通过`docker-compose.yml`
+```yaml
+ports:
+    - "0.0.0.0:18789:18789"
+```
+通过`docker run`
+```dash
+-p 0.0.0.0:18789:18789 \
 ```
 
-### 启动容器
-```bash
-sudo docker compose up -d
-```
-
-### 检查状态
-```bash
-sudo docker ps
-sudo docker logs -f openclaw-bot
-```
-### 要进入容器调试：
-```bash
-sudo docker exec -it openclaw-bot bash
-```
-⚠️ 不要用 bash 来启动 gateway，主进程必须是 openclaw gateway --foreground，否则会无限重启。
+> [!CAUTION]
+> 这一步存在风险，若您宿主机防火墙配置不当，甚至可能导致公网访问，我更推荐有条件使用Nginx反向代理
