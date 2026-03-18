@@ -3,6 +3,8 @@ Quickly launch your openclaw with Docker
 language/语言:[简体中文](README-zh_CN.md)
 ![home](images/home.png)
 
+（The demonstrated image shows the manual installation of the openclaw service, which is unrelated to this project's `start-openclaw`）
+
 ## Quick Start
 Before getting started, please ensure the following prerequisites are met:
 - Docker is installed on the host machine

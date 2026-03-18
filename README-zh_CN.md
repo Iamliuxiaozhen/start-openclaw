@@ -2,6 +2,8 @@
 利用docker快速启动您的openclaw
 语言/language:[English](README.md)
 ![home](images/home-zh.png)
+
+（所示范图片为人工安装openclaw服务，与本项目`start-openclaw`无关）
 ## 快速入门
 在此之前，请做好以下准备
 - 宿主机已安装`docker`
